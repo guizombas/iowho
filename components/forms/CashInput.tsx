@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { StyleSheet, TextInput, Text, TextInputProps, View, ViewStyle } from "react-native";
 import { colors } from "../../design/colors";
 import { formatMoneyReais } from "../../utils/format";
@@ -13,6 +13,9 @@ interface ICashInputProps extends Omit<TextInputProps, "value" | 'onChangeText'>
 
 export default function CashInput(props: ICashInputProps){
 
+    const [ int, setInt ] = useState("0");
+    const [ int2, setInt2 ] = useState("00");
+
     const [ inteiro, setInteiro ] = useState("0");
     const [ decimal, setDecimal ] = useState("00");
 
@@ -20,6 +23,10 @@ export default function CashInput(props: ICashInputProps){
         ...styles.cashInput,
         color: props.color
     };
+    
+    useLayoutEffect(() => {
+        onChange( int, int2 )
+    }, [int, int2]);
 
     function onChange( inteiro: string, decimal: string ){
         const cashe = moneyMask(`${inteiro},${decimal}`);
@@ -27,6 +34,8 @@ export default function CashInput(props: ICashInputProps){
         const [ i, d ] = cashe.toFixed(2).split(".");
         setInteiro(i);
         setDecimal(d);
+        setInt(i);
+        setInt2(d);
     }
 
     return (
@@ -38,7 +47,7 @@ export default function CashInput(props: ICashInputProps){
             <TextInput 
                 {...props}
                 value={`${inteiro}`}
-                onChangeText={ v => onChange( v, decimal ) }
+                onChangeText={ setInt }
                 style={inputStyle}
                 keyboardType="numeric"
             />
@@ -46,7 +55,7 @@ export default function CashInput(props: ICashInputProps){
             <TextInput 
                 {...props}
                 value={`${decimal}`}
-                onChangeText={ v => onChange( inteiro, v ) }
+                onChangeText={ setInt2 }
                 style={inputStyle}
                 keyboardType="numeric"
             />

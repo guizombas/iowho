@@ -1,9 +1,11 @@
-export function formatMoneyReais( valor: number ){
+import { TDateFormat } from "../design/preferences";
+
+export function formatMoneyReais( valor: number, currencySymbol?: string ){
     const [ inteiro, decimal ] = valor.toFixed(2).split(".")
-    return `R$ ${inteiro},${decimal}`
+    return `${currencySymbol??'R$'} ${inteiro},${decimal}`
 }
 
-export function formatDate( dateIn: Date ){
+export function formatDate( dateIn: Date, format?: TDateFormat ){
     const date = new Date( dateIn )
     date.setMinutes( dateIn.getMinutes() + dateIn.getTimezoneOffset() );
     
@@ -13,5 +15,8 @@ export function formatDate( dateIn: Date ){
     const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
     const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
 
-    return `${day}/${month}/${year} ${hours}:${minutes}`
+    if (format === "eua")
+        return `${month}/${day}/${year} ${hours}:${minutes}`
+    else
+        return `${day}/${month}/${year} ${hours}:${minutes}`
 }

@@ -4,8 +4,9 @@ import { useMemo } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../design/colors";
 import { IDividaInfo } from "../../interfaces/Divida/IDividaInfo";
-import { formatMoneyReais } from "../../utils/format";
 import Collaspse from "../interaction/collapse/Collapse";
+import CurrencyText from "../preferences/CurrencyText";
+import PreferenceText from "../preferences/PreferenceText";
 import Hr from "../view/Hr";
 import TransacaoInfo from "./TransacaoInfo";
 
@@ -43,8 +44,12 @@ export default function DividaInfo(props: IDividaInfoProps){
                 />
                 <View style={styles.infoView}>
                     <Text style={styles.name}>{props.pessoa.nome}</Text>
-                    <Text style={styles.label}>{userOwnsFriend ? "você o deve:" : "te deve:"  }</Text>
-                    <Text style={styles.money}>{formatMoneyReais(Math.abs(props.valor))}</Text>
+                    <PreferenceText 
+                        style={styles.label}
+                        after=":"
+                        text={userOwnsFriend ? "vc o deve" : "deve vc"  }
+                    />
+                    <CurrencyText style={styles.money}>{Math.abs(props.valor)}</CurrencyText>
                 </View>
             </View>
 

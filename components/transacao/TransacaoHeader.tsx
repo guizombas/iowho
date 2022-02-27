@@ -3,6 +3,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../design/colors";
 import IconButton from "../interaction/buttons/IconButton";
+import PreferenceText from "../preferences/PreferenceText";
 
 interface ITransacaoHeaderProps{
     userToFriend: boolean
@@ -43,12 +44,15 @@ export default function TransacaoHeader(props: ITransacaoHeaderProps){
                         backgroundColor: button.pressed ? pallet.light : undefined 
                     })}
                 >
-                    <Text style={{
-                        ...linkStyle,
-                        borderBottomColor: props.userToFriend ? pallet.text : undefined,
-                        borderBottomWidth: props.userToFriend ? 1 : 0,
-                        borderStyle: props.userToFriend ? "solid" : undefined,
-                    }}>Emprestar</Text>
+                    <PreferenceText 
+                        style={{
+                            ...linkStyle,
+                            borderBottomColor: props.userToFriend ? pallet.text : undefined,
+                            borderBottomWidth: props.userToFriend ? 1 : 0,
+                            borderStyle: props.userToFriend ? "solid" : undefined,
+                        }}
+                        text="Emprestar"
+                    />
                 </Pressable>
                 <Pressable
                     onPress={()=>{
@@ -61,12 +65,15 @@ export default function TransacaoHeader(props: ITransacaoHeaderProps){
                         backgroundColor: button.pressed ? pallet.light : undefined 
                     })}
                 >
-                    <Text style={{
-                        ...linkStyle,
-                        borderBottomColor: props.userToFriend ? undefined : pallet.text,
-                        borderBottomWidth: props.userToFriend ? 0 : 1,
-                        borderStyle: props.userToFriend ? undefined : "solid" ,
-                    }}>Pegar Emprestado</Text> 
+                    <PreferenceText 
+                        style={{
+                            ...linkStyle,
+                            borderBottomColor: props.userToFriend ? undefined : pallet.text,
+                            borderBottomWidth: props.userToFriend ? 0 : 1,
+                            borderStyle: props.userToFriend ? undefined : "solid" ,
+                        }}
+                        text="Pegar Emprestado"
+                    /> 
                 </Pressable>
             </View>
         </View>
