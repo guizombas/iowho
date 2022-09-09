@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import PessoaInfo from "../components/cards/PessoaInfo";
 import { Mock_Pessoas } from "../mocks/PessoasInfo";
 
@@ -18,7 +18,6 @@ export default function Pessoas(){
             )}
             style={styles.screenBody}
         />
-        
     )
 }
 

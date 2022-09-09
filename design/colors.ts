@@ -20,6 +20,13 @@ export const colors = {
         text: "#ffffff"
     } as IColorPallet,
 
+    info: {
+        x: "#9575cd",
+        dark: "#65499c",
+        light: "#c7a4ff",
+        text: "#000000"
+    },
+
     success: "#8DED8E",
     danger: "#FA5555",
 

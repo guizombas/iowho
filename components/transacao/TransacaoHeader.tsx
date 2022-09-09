@@ -11,10 +11,8 @@ interface ITransacaoHeaderProps{
 
 export default function TransacaoHeader(props: ITransacaoHeaderProps){
 
-    const { setParams } = useNavigation();
+    const { setParams, goBack } = useNavigation();
     const { params } = useRoute();
-
-    const { goBack } = useNavigation()
 
     const pallet = props.userToFriend ? colors.prim : colors.sec;
     const linkStyle = {

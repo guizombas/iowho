@@ -14,7 +14,9 @@ interface ICircleButtonProps{
     style?: ViewStyle,
     iconSize?: number,
 
-    dimentions: number
+    dimentions: number,
+
+    disabled?: boolean
 }
 
 export default function CircleButton(props: ICircleButtonProps){
@@ -30,14 +32,19 @@ export default function CircleButton(props: ICircleButtonProps){
             style={ button => ({
                 ...styles.circleButton,
                 ...buttonStyle,
-                backgroundColor: button.pressed ? props.pallet.light :  props.pallet.x,
+                backgroundColor: props.disabled ? props.pallet.text : (
+                    button.pressed ? props.pallet.light :  props.pallet.x
+                ),
+                borderColor: props.disabled ? props.pallet.light : undefined,
+                borderWidth: props.disabled ? 1 : 0, 
                 ...props.style
             })}
             onPress={props.onPress}
+            disabled={props.disabled}
         >
             <FontAwesomeIcon 
                 icon={props.icon} 
-                color={props.pallet.text}
+                color={props.disabled ? props.pallet.light : props.pallet.text}
                 size={props.iconSize}
             />
         </Pressable>

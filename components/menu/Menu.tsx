@@ -9,9 +9,11 @@ export default function Menu(props: BottomTabBarProps){
     
     const lastHistory = props.state.history[ props.state.history.length - 1 ];
     const currentRoute = props.state.routes.find( r => r.key === lastHistory?.key )
+
+    const shouldShow = currentRoute?.name !== "Transacao" && currentRoute?.name !== "PessoaSelector"
     
     return (
-        <View style={currentRoute?.name !== "Transacao" ? styles.menuContainer : {
+        <View style={shouldShow ? styles.menuContainer : {
             display: "none"
         }}>
             <IconButton

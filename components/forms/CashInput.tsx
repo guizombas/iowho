@@ -1,8 +1,7 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { StyleSheet, TextInput, Text, TextInputProps, View, ViewStyle } from "react-native";
-import { colors } from "../../design/colors";
-import { formatMoneyReais } from "../../utils/format";
 import { moneyMask } from "../../utils/inputMask";
+import CurrencyText from "../preferences/CurrencyText";
 
 interface ICashInputProps extends Omit<TextInputProps, "value" | 'onChangeText'>{
     value: number,
@@ -13,41 +12,32 @@ interface ICashInputProps extends Omit<TextInputProps, "value" | 'onChangeText'>
 
 export default function CashInput(props: ICashInputProps){
 
-    const [ int, setInt ] = useState("0");
-    const [ int2, setInt2 ] = useState("00");
+    const casheValue = props.value;
 
-    const [ inteiro, setInteiro ] = useState("0");
-    const [ decimal, setDecimal ] = useState("00");
+    const [ inteiro, decimal ]= casheValue.toFixed(2).split(".")
 
     const inputStyle = {
         ...styles.cashInput,
         color: props.color
     };
-    
-    useLayoutEffect(() => {
-        onChange( int, int2 )
-    }, [int, int2]);
 
     function onChange( inteiro: string, decimal: string ){
         const cashe = moneyMask(`${inteiro},${decimal}`);
         props.onChangeText( cashe );
-        const [ i, d ] = cashe.toFixed(2).split(".");
-        setInteiro(i);
-        setDecimal(d);
-        setInt(i);
-        setInt2(d);
     }
+    
 
     return (
         <View style={{
             ...styles.inputView,
             ...props.style
         }}>
-            <Text style={inputStyle}>R$ </Text>
+            <CurrencyText style={inputStyle}/><Text style={inputStyle}></Text>
             <TextInput 
                 {...props}
                 value={`${inteiro}`}
-                onChangeText={ setInt }
+                onChangeText={ txt => onChange( txt, decimal ) }
+                onChange={e => e.target}
                 style={inputStyle}
                 keyboardType="numeric"
             />
@@ -55,7 +45,7 @@ export default function CashInput(props: ICashInputProps){
             <TextInput 
                 {...props}
                 value={`${decimal}`}
-                onChangeText={ setInt2 }
+                onChangeText={ txt => onChange( inteiro, txt ) }
                 style={inputStyle}
                 keyboardType="numeric"
             />

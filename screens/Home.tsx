@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, Text } from "react-native";
 import DividaInfo from "../components/cards/DividaInfo";
 import { Mock_Dividas } from "../mocks/DividasInfo";
 
-export default function Transacao(){
+export default function Home(){
     const lstDividas = Mock_Dividas;
 
     return (

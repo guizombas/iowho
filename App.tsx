@@ -8,6 +8,7 @@ import Transacao from './screens/Transacao';
 import Menu from './components/menu/Menu';
 import { colors } from './design/colors';
 import { StatusBar } from 'expo-status-bar';
+import PessoaSelectorScreen from './screens/PessoaSelectorScreen';
 
 const BTab = createBottomTabNavigator();
 
@@ -32,13 +33,18 @@ export default function App() {
               name="Transacao" 
               options={{
                 headerShown: false,
-                tabBarStyle: {
-                  display: "none"
-                }
               }}
               component={Transacao} 
               initialParams={{
                 userToFriend: false,
+                idPessoa: 0
+              }}
+            />
+            <BTab.Screen 
+              name="PessoaSelector"
+              component={PessoaSelectorScreen}
+              options={{
+                title: "Selecionar Pessoa"
               }}
             />
             <BTab.Screen 

@@ -14,9 +14,9 @@ interface IPrefereceProviderProps{
 }
 
 const contextInicialValue = {
-    lang: "en",
-    currency: "dolar",
-    date: "eua"
+    lang: "pt",
+    currency: "real",
+    date: "normal"
 } as IPreferenceContext
 
 export const prefereceContext = createContext(contextInicialValue);
